@@ -32,11 +32,11 @@ import timber.log.Timber;
 
 public class MovieFragment extends BaseFragment implements MainContract.View {
 
+    private static final String KEY_TAB = "tab";
     @Inject MainPresenter presenter;
     private FragmentMovieBinding movieBinding;
     private ArrayList<MovieResponse.Movie> mMovieList;
     private MovieListAdapter movieListAdapter;
-    private static final String KEY_TAB = "tab";
     private int mTab = 0;
     private String searchQuery;
 
@@ -129,7 +129,7 @@ public class MovieFragment extends BaseFragment implements MainContract.View {
     }
 
     @Override public void showEmptyMovies(String message) {
-        Toast.makeText(getActivity(),message, Toast.LENGTH_SHORT).show();
+        Toast.makeText(getActivity(), message, Toast.LENGTH_SHORT).show();
         hidePrograssBar();
     }
 

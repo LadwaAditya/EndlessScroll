@@ -15,8 +15,16 @@ import timber.log.Timber;
  */
 
 public class MovieSearchApplication extends Application {
-    ApplicationComponent mApplicationComponent;
     private static MovieSearchApplication sMoviewMovieSearchApplication;
+    ApplicationComponent mApplicationComponent;
+
+    public static MovieSearchApplication get(Context context) {
+        return (MovieSearchApplication) context.getApplicationContext();
+    }
+
+    public static synchronized MovieSearchApplication getInstance() {
+        return sMoviewMovieSearchApplication;
+    }
 
     @Override
     public void onCreate() {
@@ -28,14 +36,10 @@ public class MovieSearchApplication extends Application {
         }
     }
 
-    public static MovieSearchApplication get(Context context) {
-        return (MovieSearchApplication) context.getApplicationContext();
-    }
-
     public ApplicationComponent getComponent() {
         if (mApplicationComponent == null) {
             mApplicationComponent = DaggerApplicationComponent.builder()
-                    .applicationModule(new ApplicationModule(this,BuildConfig.MOVIE_API_URL))
+                    .applicationModule(new ApplicationModule(this, BuildConfig.MOVIE_API_URL))
                     .build();
         }
         return mApplicationComponent;
@@ -44,9 +48,5 @@ public class MovieSearchApplication extends Application {
     // Needed to replace the component with a test specific one
     public void setComponent(ApplicationComponent applicationComponent) {
         mApplicationComponent = applicationComponent;
-    }
-
-    public static synchronized MovieSearchApplication getInstance() {
-        return sMoviewMovieSearchApplication;
     }
 }

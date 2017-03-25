@@ -3,7 +3,6 @@ package com.ladwa.aditya.moviesearch.injection.component;
 import android.app.Application;
 import android.content.Context;
 
-
 import com.ladwa.aditya.moviesearch.data.DataManager;
 import com.ladwa.aditya.moviesearch.injection.module.ApplicationModule;
 import com.ladwa.aditya.moviesearch.injection.scope.ApplicationContext;

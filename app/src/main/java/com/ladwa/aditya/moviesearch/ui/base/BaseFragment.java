@@ -4,10 +4,6 @@ import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
 import android.support.v4.util.LongSparseArray;
-import android.view.LayoutInflater;
-import android.view.View;
-import android.view.ViewGroup;
-
 
 import com.ladwa.aditya.moviesearch.MovieSearchApplication;
 import com.ladwa.aditya.moviesearch.injection.component.ConfigPersistentComponent;

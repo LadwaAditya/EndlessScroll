@@ -27,15 +27,12 @@ import static org.mockito.Mockito.when;
  */
 public class MainPresenterTest {
 
-    @Mock DataManager mockDataManager;
-    @Mock MainContract.View mockView;
-    @Rule public final RxSchedulersOverrideRule mOverrideRule = new RxSchedulersOverrideRule();
-
-
-    private MainPresenter presenter;
-
     private static final String SEARCH_TERM = "Batman";
     private static final int PAGE = 1;
+    @Rule public final RxSchedulersOverrideRule mOverrideRule = new RxSchedulersOverrideRule();
+    @Mock DataManager mockDataManager;
+    @Mock MainContract.View mockView;
+    private MainPresenter presenter;
 
     @Before
     public void setUp() throws Exception {

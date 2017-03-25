@@ -1,7 +1,6 @@
 package com.ladwa.aditya.moviesearch.injection.component;
 
 
-
 import com.ladwa.aditya.moviesearch.injection.module.ActivityModule;
 import com.ladwa.aditya.moviesearch.injection.module.FragmentModule;
 import com.ladwa.aditya.moviesearch.injection.scope.ConfigPersistent;

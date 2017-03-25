@@ -19,7 +19,6 @@ import com.ladwa.aditya.moviesearch.databinding.ListItemMovieBinding;
 import java.util.List;
 
 /**
- *
  * Created by Aditya on 25-Mar-17.
  */
 
@@ -58,18 +57,18 @@ public class MovieListAdapter extends RecyclerView.Adapter<MovieListAdapter.View
             binding.setHolder(this);
         }
 
-        public void bindMovie(MovieResponse.Movie movie) {
-            mMovie = movie;
-            mBinding.setMovie(movie);
-            mBinding.executePendingBindings();
-        }
-
         @BindingAdapter({"bind:imageUrl"}) public static void loadImage(ImageView imageView, String imageUrl) {
             Glide.with(imageView.getContext())
                     .load(imageUrl)
                     .placeholder(R.color.colorAccent)
                     .diskCacheStrategy(DiskCacheStrategy.ALL)
                     .into(imageView);
+        }
+
+        public void bindMovie(MovieResponse.Movie movie) {
+            mMovie = movie;
+            mBinding.setMovie(movie);
+            mBinding.executePendingBindings();
         }
 
         public void onClick(View view) {

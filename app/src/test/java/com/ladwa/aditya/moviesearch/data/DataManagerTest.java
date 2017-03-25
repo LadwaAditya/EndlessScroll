@@ -23,11 +23,10 @@ import io.reactivex.Single;
 @RunWith(MockitoJUnitRunner.StrictStubs.class)
 public class DataManagerTest {
 
-    @Mock MovieSearchService mockMovieSearchService;
-    @Rule public final RxSchedulersOverrideRule mOverrideRule = new RxSchedulersOverrideRule();
-
     private static final String SEARCH_STRING = "Batman";
     private static final int PAGE = 1;
+    @Rule public final RxSchedulersOverrideRule mOverrideRule = new RxSchedulersOverrideRule();
+    @Mock MovieSearchService mockMovieSearchService;
     private DataManager dataManager;
 
     @Before
