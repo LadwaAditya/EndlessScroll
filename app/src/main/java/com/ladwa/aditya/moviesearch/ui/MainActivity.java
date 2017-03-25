@@ -1,7 +1,9 @@
-package com.ladwa.aditya.moviesearch;
+package com.ladwa.aditya.moviesearch.ui;
 
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+
+import com.ladwa.aditya.moviesearch.R;
 
 public class MainActivity extends AppCompatActivity {
 
