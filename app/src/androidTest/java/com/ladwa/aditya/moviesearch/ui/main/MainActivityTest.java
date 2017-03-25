@@ -42,7 +42,6 @@ public class MainActivityTest {
     private final ActivityTestRule<MainActivity> activityTestRule = new ActivityTestRule<>(MainActivity.class, false, false);
 
     private static final int RESULT_OK = 200;
-    private static final int RESULT_ERROR = 400;
 
     private static final String PATH_MOVIE = "/movies.json";
     private static final String PATH_MOVIE_ZERO = "/movieszero.json";
