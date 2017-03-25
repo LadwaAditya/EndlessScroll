@@ -1,6 +1,6 @@
 package com.ladwa.aditya.moviesearch.data;
 
-import com.ladwa.aditya.moviesearch.data.model.Movie;
+import com.ladwa.aditya.moviesearch.data.model.MovieResponse;
 import com.ladwa.aditya.moviesearch.data.remote.MovieSearchService;
 
 import javax.inject.Inject;
@@ -21,7 +21,7 @@ public class DataManager implements DataRepository {
         this.movieSearchService = movieSearchService;
     }
 
-    public Single<Movie> getMovies(String search, int page) {
+    public Single<MovieResponse> getMovies(String search, int page) {
         return movieSearchService.getMovie(search, page);
     }
 }

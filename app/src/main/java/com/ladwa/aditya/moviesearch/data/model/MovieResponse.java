@@ -8,21 +8,21 @@ import java.util.List;
  * Created by Aditya on 25-Mar-17.
  */
 
-public class Movie {
+public class MovieResponse {
 
     @SerializedName("Search")
-    private List<Search> Search;
+    private List<Movie> Movie;
     @SerializedName("totalResults")
     private String totalResults;
     @SerializedName("Response")
     private String Response;
 
-    public List<Search> getSearch() {
-        return Search;
+    public List<Movie> getMovie() {
+        return Movie;
     }
 
-    public void setSearch(List<Search> Search) {
-        this.Search = Search;
+    public void setMovie(List<Movie> Movie) {
+        this.Movie = Movie;
     }
 
     public String getTotalResults() {
@@ -41,7 +41,7 @@ public class Movie {
         this.Response = Response;
     }
 
-    public static class Search {
+    public static class Movie {
         @SerializedName("Title")
         private String Title;
         @SerializedName("Year")

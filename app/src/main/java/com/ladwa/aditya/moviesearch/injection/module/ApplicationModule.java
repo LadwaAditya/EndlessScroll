@@ -3,7 +3,11 @@ package com.ladwa.aditya.moviesearch.injection.module;
 import android.app.Application;
 import android.content.Context;
 
+import com.ladwa.aditya.moviesearch.data.remote.MovieSearchService;
+import com.ladwa.aditya.moviesearch.data.remote.MovieSearchServiceFactory;
 import com.ladwa.aditya.moviesearch.injection.scope.ApplicationContext;
+
+import javax.inject.Singleton;
 
 import dagger.Module;
 import dagger.Provides;
@@ -34,5 +38,10 @@ public class ApplicationModule {
         return mApplication;
     }
 
+    @Provides
+    @Singleton
+    MovieSearchService providesMovieService() {
+        return MovieSearchServiceFactory.makeMovieSearchService(mBaseUrl);
+    }
 
 }

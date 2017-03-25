@@ -1,6 +1,6 @@
 package com.ladwa.aditya.moviesearch.data.remote;
 
-import com.ladwa.aditya.moviesearch.data.model.Movie;
+import com.ladwa.aditya.moviesearch.data.model.MovieResponse;
 
 import io.reactivex.Single;
 import retrofit2.http.GET;
@@ -13,5 +13,5 @@ import retrofit2.http.Query;
 public interface MovieSearchService {
 
     @GET("?")
-    Single<Movie> getMovie(@Query("s") String search, @Query("page") int page);
+    Single<MovieResponse> getMovie(@Query("s") String search, @Query("page") int page);
 }
