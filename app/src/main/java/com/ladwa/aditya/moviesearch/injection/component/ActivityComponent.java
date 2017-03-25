@@ -4,6 +4,7 @@ package com.ladwa.aditya.moviesearch.injection.component;
 import com.ladwa.aditya.moviesearch.injection.module.ActivityModule;
 import com.ladwa.aditya.moviesearch.injection.scope.PerActivity;
 import com.ladwa.aditya.moviesearch.ui.base.BaseActivity;
+import com.ladwa.aditya.moviesearch.ui.main.MainActivity;
 
 import dagger.Subcomponent;
 
@@ -15,4 +16,5 @@ import dagger.Subcomponent;
 public interface ActivityComponent {
     void inject(BaseActivity baseActivity);
 
+    void inject(MainActivity mainActivity);
 }

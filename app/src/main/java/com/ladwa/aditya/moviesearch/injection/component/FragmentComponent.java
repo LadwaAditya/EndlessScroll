@@ -1,9 +1,9 @@
 package com.ladwa.aditya.moviesearch.injection.component;
 
 
-
 import com.ladwa.aditya.moviesearch.injection.module.FragmentModule;
 import com.ladwa.aditya.moviesearch.injection.scope.PerFragment;
+import com.ladwa.aditya.moviesearch.ui.main.MovieFragment;
 
 import dagger.Subcomponent;
 
@@ -14,5 +14,5 @@ import dagger.Subcomponent;
 @PerFragment
 @Subcomponent(modules = FragmentModule.class)
 public interface FragmentComponent {
-
+    void inject(MovieFragment fragment);
 }

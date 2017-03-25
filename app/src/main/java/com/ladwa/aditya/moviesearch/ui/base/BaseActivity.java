@@ -5,7 +5,6 @@ import android.support.v4.util.LongSparseArray;
 import android.support.v7.app.AppCompatActivity;
 import android.view.MenuItem;
 
-
 import com.ladwa.aditya.moviesearch.MovieSearchApplication;
 import com.ladwa.aditya.moviesearch.injection.component.ActivityComponent;
 import com.ladwa.aditya.moviesearch.injection.component.ConfigPersistentComponent;
