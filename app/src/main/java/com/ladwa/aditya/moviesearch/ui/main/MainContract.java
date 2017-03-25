@@ -18,5 +18,7 @@ public class MainContract {
 
     interface View extends MvpView {
         void showMovies(List<MovieResponse.Movie> movieList);
+
+        void showEmptyMovies(String message);
     }
 }

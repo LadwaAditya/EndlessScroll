@@ -46,12 +46,12 @@ public class MainPresenter extends BasePresenter<MainContract.View> implements M
                         if (movieResponse.getResponse().equalsIgnoreCase("True")) {
                             getMvpView().showMovies(movieResponse.getMovie());
                         } else {
-                            getMvpView().showError("No movies found");
+                            getMvpView().showEmptyMovies("No movies found");
                         }
                     }
 
                     @Override public void onError(Throwable e) {
-                        getMvpView().showError(e.getMessage());
+                        getMvpView().showError(e);
                     }
                 }));
     }

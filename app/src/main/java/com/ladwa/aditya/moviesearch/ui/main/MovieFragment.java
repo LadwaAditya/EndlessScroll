@@ -108,10 +108,11 @@ public class MovieFragment extends BaseFragment implements MainContract.View {
 
     }
 
-    @Override public void showError(String error) {
-        Toast.makeText(getActivity(), error, Toast.LENGTH_SHORT).show();
+    @Override public void showError(Throwable error) {
+        Toast.makeText(getActivity(), error.getMessage(), Toast.LENGTH_SHORT).show();
         hidePrograssBar();
     }
+
 
     private void hidePrograssBar() {
         movieBinding.progressBar.setVisibility(View.INVISIBLE);
@@ -124,6 +125,11 @@ public class MovieFragment extends BaseFragment implements MainContract.View {
     @Override public void showMovies(List<MovieResponse.Movie> movieList) {
         mMovieList.addAll(movieList);
         movieListAdapter.notifyDataSetChanged();
+        hidePrograssBar();
+    }
+
+    @Override public void showEmptyMovies(String message) {
+        Toast.makeText(getActivity(),message, Toast.LENGTH_SHORT).show();
         hidePrograssBar();
     }
 

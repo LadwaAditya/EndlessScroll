@@ -1,9 +1,9 @@
 package com.ladwa.aditya.moviesearch.ui.main;
 
-import com.ladwa.aditya.moviesearch.util.RxSchedulersOverrideRule;
-import com.ladwa.aditya.moviesearch.util.TestDataFactory;
 import com.ladwa.aditya.moviesearch.data.DataManager;
 import com.ladwa.aditya.moviesearch.data.model.MovieResponse;
+import com.ladwa.aditya.moviesearch.util.RxSchedulersOverrideRule;
+import com.ladwa.aditya.moviesearch.util.TestDataFactory;
 
 import org.junit.After;
 import org.junit.Before;
@@ -62,7 +62,8 @@ public class MainPresenterTest {
         presenter.getMovies(SEARCH_TERM, PAGE);
 
         verify(mockView).showMovies(movieArrayList);
-        verify(mockView, never()).showError(any(String.class));
+        verify(mockView, never()).showEmptyMovies(any(String.class));
+        verify(mockView, never()).showError(any(Throwable.class));
     }
 
 
@@ -76,7 +77,21 @@ public class MainPresenterTest {
 
         presenter.getMovies(SEARCH_TERM, PAGE);
 
-        verify(mockView,never()).showMovies(any(List.class));
-        verify(mockView).showError(any(String.class));
+        verify(mockView).showEmptyMovies(any(String.class));
+        verify(mockView, never()).showMovies(any(List.class));
+        verify(mockView, never()).showError(any(Throwable.class));
+
+    }
+
+
+    @Test
+    public void getMovies_shouldReturnError() throws Exception {
+        when(mockDataManager.getMovies(SEARCH_TERM, PAGE)).thenReturn(Single.error(new RuntimeException()));
+
+        presenter.getMovies(SEARCH_TERM, PAGE);
+
+        verify(mockView).showError(any(Throwable.class));
+        verify(mockView, never()).showMovies(any(List.class));
+        verify(mockView, never()).showEmptyMovies(any(String.class));
     }
 }
