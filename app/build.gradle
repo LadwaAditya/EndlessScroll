@@ -10,7 +10,7 @@ android {
         targetSdkVersion 25
         versionCode 1
         versionName "1.0"
-        testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
+        testInstrumentationRunner "com.ladwa.aditya.moviesearch.runner.CustomTestRunner"
 
         buildConfigField("String", "MOVIE_API_URL", "\"${OpenMovieDbUrl}\"")
 
@@ -57,6 +57,7 @@ android {
         jvmArgs '-noverify'
         incremental true
     }
+    sourceSets { main { assets.srcDirs = ['src/main/assets', 'src/androidTest/assets/'] } }
 }
 
 
@@ -75,6 +76,8 @@ dependencies {
     final MOCKITO_VERSION = '2.6.8'
     final TIMBER_VERSION = '4.5.1'
     final LEAKCANARY_VERSION = '1.5'
+    final MOCKWEBSERVER_VERSION = '3.6.0'
+    final RESTMOCK_VERSION = '0.2.0'
 
 
     def daggerCompiler = "com.google.dagger:dagger-compiler:$DAGGER_VERSION"
@@ -121,7 +124,6 @@ dependencies {
     releaseCompile "com.squareup.leakcanary:leakcanary-android-no-op:$LEAKCANARY_VERSION"
     testCompile "com.squareup.leakcanary:leakcanary-android-no-op:$LEAKCANARY_VERSION"
 
-
     // Instrumentation test dependencies
     androidTestCompile jUnit
     androidTestCompile mockito
@@ -136,6 +138,8 @@ dependencies {
     androidTestCompile "com.android.support.test:runner:$RUNNER_VERSION"
     androidTestCompile "com.android.support.test:rules:$RUNNER_VERSION"
     androidTestCompile "org.mockito:mockito-android:$MOCKITO_VERSION"
+    androidTestCompile "com.squareup.okhttp3:mockwebserver:$MOCKWEBSERVER_VERSION"
+    androidTestCompile "com.github.andrzejchm.RESTMock:android:$RESTMOCK_VERSION"
 
     // Unit tests dependencies
     testCompile jUnit
@@ -144,7 +148,6 @@ dependencies {
     testCompile "org.hamcrest:hamcrest-library:$HAMCREST_VERSION"
     testCompile "org.hamcrest:hamcrest-integration:$HAMCREST_VERSION"
     testCompile "com.android.support:support-annotations:$SUPPORT_LIBRARY_VERSION"
-
 
     // APT dependencies
     annotationProcessor daggerCompiler
