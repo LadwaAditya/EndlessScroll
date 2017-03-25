@@ -3,6 +3,7 @@ package com.ladwa.aditya.moviesearch.ui.main;
 import android.databinding.DataBindingUtil;
 import android.os.Bundle;
 import android.support.design.widget.TabLayout;
+import android.support.v4.util.Pair;
 import android.view.View;
 import android.widget.Toast;
 
@@ -15,8 +16,10 @@ import io.reactivex.subjects.PublishSubject;
 
 public class MainActivity extends BaseActivity implements TabLayout.OnTabSelectedListener {
 
+
     private ActivityMainBinding mBinding;
-    private PublishSubject<String> mPublishSubject = PublishSubject.create();
+    private PublishSubject<Pair<Integer, String>> mPublishSubject = PublishSubject.create();
+    private Integer currentTab = 0;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -29,12 +32,13 @@ public class MainActivity extends BaseActivity implements TabLayout.OnTabSelecte
         mBinding.tabLayout.addOnTabSelectedListener(this);
     }
 
-    public PublishSubject<String> getPublishSubject() {
+    public PublishSubject<Pair<Integer, String>> getPublishSubject() {
         return mPublishSubject;
     }
 
     @Override public void onTabSelected(TabLayout.Tab tab) {
         mBinding.pager.setCurrentItem(tab.getPosition());
+        currentTab = tab.getPosition();
     }
 
     @Override public void onTabUnselected(TabLayout.Tab tab) {
@@ -47,7 +51,8 @@ public class MainActivity extends BaseActivity implements TabLayout.OnTabSelecte
 
 
     public void onClickSearch(View view) {
-        Toast.makeText(this, mBinding.txtSearch.getText().toString(), Toast.LENGTH_SHORT).show();
-        mPublishSubject.onNext(mBinding.txtSearch.getText().toString());
+        String searchQuery = mBinding.txtSearch.getText().toString().trim();
+        Toast.makeText(this, searchQuery, Toast.LENGTH_SHORT).show();
+        mPublishSubject.onNext(new Pair<>(currentTab, searchQuery));
     }
 }

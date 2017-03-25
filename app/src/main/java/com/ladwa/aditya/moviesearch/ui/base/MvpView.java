@@ -6,4 +6,6 @@ package com.ladwa.aditya.moviesearch.ui.base;
 
 public interface MvpView {
     void setUpView();
+
+    void showError(String error);
 }

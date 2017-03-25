@@ -24,9 +24,9 @@ public class MoviePagerAdapter extends FragmentPagerAdapter {
     public Fragment getItem(int position) {
         switch (position) {
             case 0:
-                return MovieFragment.newInstance();
+                return MovieFragment.newInstance(0);
             case 1:
-                return MovieFragment.newInstance();
+                return MovieFragment.newInstance(1);
         }
         return null;
     }

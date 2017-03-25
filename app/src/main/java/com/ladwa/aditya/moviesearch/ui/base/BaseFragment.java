@@ -55,15 +55,6 @@ public abstract class BaseFragment extends Fragment {
         mFragmentComponent = configPersistentComponent.fragmentComponent(new FragmentModule(this));
     }
 
-    @Nullable
-    @Override
-    public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container,
-                             @Nullable Bundle savedInstanceState) {
-        View view = inflater.inflate(getLayout(), container, false);
-        return view;
-    }
-
-    public abstract int getLayout();
 
     @Override
     public void onSaveInstanceState(Bundle outState) {
