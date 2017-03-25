@@ -55,7 +55,6 @@ public class MainActivity extends BaseActivity implements TabLayout.OnTabSelecte
     public void onClickSearch(View view) {
         String searchQuery = mBinding.txtSearch.getText().toString().trim();
         if (searchQuery.length() > 0) {
-            Toast.makeText(this, searchQuery, Toast.LENGTH_SHORT).show();
             mPublishSubject.onNext(new Pair<>(currentTab, searchQuery));
         } else {
             Toast.makeText(this, R.string.error_no_movie_entered, Toast.LENGTH_SHORT).show();
