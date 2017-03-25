@@ -1,3 +1,5 @@
 <resources>
     <string name="app_name">MovieSearch</string>
+    <string name="error_no_movie_entered">Please Input a movie name</string>
+    <string name="hint_type_a_movie_name">Type a movie name</string>
 </resources>

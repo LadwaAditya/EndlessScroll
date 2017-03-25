@@ -19,6 +19,7 @@ import com.ladwa.aditya.moviesearch.databinding.ListItemMovieBinding;
 import java.util.List;
 
 /**
+ *
  * Created by Aditya on 25-Mar-17.
  */
 

@@ -29,15 +29,16 @@
                         android:id="@+id/txt_search"
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
-                        android:layout_weight="9"/>
+                        android:layout_weight="9"
+                        android:hint="@string/hint_type_a_movie_name"/>
 
                     <ImageView
-                        android:onClick="onClickSearch"
                         android:id="@+id/img_search"
-                        android:src="@android:drawable/ic_menu_search"
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
-                        android:layout_weight="1"/>
+                        android:layout_weight="1"
+                        android:onClick="onClickSearch"
+                        android:src="@android:drawable/ic_menu_search"/>
                 </LinearLayout>
             </android.support.v7.widget.Toolbar>
         </android.support.design.widget.AppBarLayout>

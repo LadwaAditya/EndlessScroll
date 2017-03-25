@@ -1,10 +1,12 @@
 package com.ladwa.aditya.moviesearch.ui.main;
 
+import android.content.Context;
 import android.databinding.DataBindingUtil;
 import android.os.Bundle;
 import android.support.design.widget.TabLayout;
 import android.support.v4.util.Pair;
 import android.view.View;
+import android.view.inputmethod.InputMethodManager;
 import android.widget.Toast;
 
 import com.ladwa.aditya.moviesearch.R;
@@ -52,7 +54,13 @@ public class MainActivity extends BaseActivity implements TabLayout.OnTabSelecte
 
     public void onClickSearch(View view) {
         String searchQuery = mBinding.txtSearch.getText().toString().trim();
-        Toast.makeText(this, searchQuery, Toast.LENGTH_SHORT).show();
-        mPublishSubject.onNext(new Pair<>(currentTab, searchQuery));
+        if (searchQuery.length() > 0) {
+            Toast.makeText(this, searchQuery, Toast.LENGTH_SHORT).show();
+            mPublishSubject.onNext(new Pair<>(currentTab, searchQuery));
+        } else {
+            Toast.makeText(this, R.string.error_no_movie_entered, Toast.LENGTH_SHORT).show();
+        }
+        InputMethodManager imm = (InputMethodManager) getSystemService(Context.INPUT_METHOD_SERVICE);
+        imm.hideSoftInputFromWindow(view.getWindowToken(), 0);
     }
 }

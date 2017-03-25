@@ -4,9 +4,9 @@ import android.databinding.DataBindingUtil;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
-import android.support.v7.widget.DefaultItemAnimator;
 import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.LinearLayoutManager;
+import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -15,9 +15,11 @@ import android.widget.Toast;
 import com.ladwa.aditya.moviesearch.R;
 import com.ladwa.aditya.moviesearch.data.model.MovieResponse;
 import com.ladwa.aditya.moviesearch.databinding.FragmentMovieBinding;
+import com.ladwa.aditya.moviesearch.ui.adapter.EndlessRecyclerViewScrollListener;
 import com.ladwa.aditya.moviesearch.ui.adapter.MovieListAdapter;
 import com.ladwa.aditya.moviesearch.ui.base.BaseFragment;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.inject.Inject;
@@ -32,8 +34,11 @@ public class MovieFragment extends BaseFragment implements MainContract.View {
 
     @Inject MainPresenter presenter;
     private FragmentMovieBinding movieBinding;
+    private ArrayList<MovieResponse.Movie> mMovieList;
+    private MovieListAdapter movieListAdapter;
     private static final String KEY_TAB = "tab";
     private int mTab = 0;
+    private String searchQuery;
 
     public static Fragment newInstance(int tab) {
         Bundle bundle = new Bundle();
@@ -69,18 +74,38 @@ public class MovieFragment extends BaseFragment implements MainContract.View {
     }
 
     @Override public void setUpView() {
+        mMovieList = new ArrayList<>();
+        movieListAdapter = new MovieListAdapter(mMovieList);
         if (mTab == 0) {
-            movieBinding.rvMovie.setLayoutManager(new LinearLayoutManager(getActivity()));
+            LinearLayoutManager linearLayoutManager = new LinearLayoutManager(getActivity());
+            movieBinding.rvMovie.setLayoutManager(linearLayoutManager);
+            movieBinding.rvMovie.setAdapter(movieListAdapter);
+            movieBinding.rvMovie.addOnScrollListener(new EndlessRecyclerViewScrollListener(linearLayoutManager) {
+                @Override public void onLoadMore(int page, int totalItemsCount, RecyclerView view) {
+                    presenter.getMovies(searchQuery, page + 1);
+                    showProgressBar();
+                }
+            });
         } else if (mTab == 1) {
-            movieBinding.rvMovie.setLayoutManager(new GridLayoutManager(getActivity(), 2));
+            GridLayoutManager gridLayoutManager = new GridLayoutManager(getActivity(), 2);
+            movieBinding.rvMovie.setLayoutManager(gridLayoutManager);
+            movieBinding.rvMovie.setAdapter(movieListAdapter);
+            movieBinding.rvMovie.addOnScrollListener(new EndlessRecyclerViewScrollListener(gridLayoutManager) {
+                @Override public void onLoadMore(int page, int totalItemsCount, RecyclerView view) {
+                    presenter.getMovies(searchQuery, page + 1);
+                    showProgressBar();
+                }
+            });
         }
         ((MainActivity) getActivity()).getPublishSubject().subscribe(integerStringPair -> {
             if (integerStringPair.first == mTab) {
+                searchQuery = integerStringPair.second;
                 movieBinding.progressBar.setVisibility(View.VISIBLE);
                 presenter.getMovies(integerStringPair.second, 1);
             }
         });
-        movieBinding.rvMovie.setItemAnimator(new DefaultItemAnimator());
+
+
     }
 
     @Override public void showError(String error) {
@@ -92,8 +117,13 @@ public class MovieFragment extends BaseFragment implements MainContract.View {
         movieBinding.progressBar.setVisibility(View.INVISIBLE);
     }
 
+    private void showProgressBar() {
+        movieBinding.progressBar.setVisibility(View.VISIBLE);
+    }
+
     @Override public void showMovies(List<MovieResponse.Movie> movieList) {
-        movieBinding.rvMovie.setAdapter(new MovieListAdapter(movieList));
+        mMovieList.addAll(movieList);
+        movieListAdapter.notifyDataSetChanged();
         hidePrograssBar();
     }
 
