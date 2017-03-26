@@ -101,6 +101,7 @@ public class MovieFragment extends BaseFragment implements MainContract.View {
             if (integerStringPair.first == mTab) {
                 searchQuery = integerStringPair.second;
                 movieBinding.progressBar.setVisibility(View.VISIBLE);
+                mMovieList.clear();
                 presenter.getMovies(integerStringPair.second, 1);
             }
         });
