@@ -9,5 +9,13 @@ import io.reactivex.Single;
  */
 
 public interface DataRepository {
+    /**
+     * Provides a list of {@link com.ladwa.aditya.moviesearch.data.model.MovieResponse.Movie} as Response
+     * given a search string and page
+     *
+     * @param search
+     * @param page
+     * @return
+     */
     Single<MovieResponse> getMovies(String search, int page);
 }
