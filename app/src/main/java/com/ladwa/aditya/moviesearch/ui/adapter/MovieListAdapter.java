@@ -31,19 +31,22 @@ public class MovieListAdapter extends RecyclerView.Adapter<MovieListAdapter.View
         this.movieArrayList = movieArrayList;
     }
 
-    @Override public ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
+    @Override
+    public ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
         LayoutInflater layoutInflater = LayoutInflater.from(parent.getContext());
         ListItemMovieBinding binding = DataBindingUtil.inflate(layoutInflater, R.layout.list_item_movie, parent, false);
         return new ViewHolder(binding);
     }
 
 
-    @Override public void onBindViewHolder(ViewHolder holder, int position) {
+    @Override
+    public void onBindViewHolder(ViewHolder holder, int position) {
         final MovieResponse.Movie movie = movieArrayList.get(position);
         holder.bindMovie(movie);
     }
 
-    @Override public int getItemCount() {
+    @Override
+    public int getItemCount() {
         return movieArrayList != null ? movieArrayList.size() : 0;
     }
 
@@ -57,7 +60,8 @@ public class MovieListAdapter extends RecyclerView.Adapter<MovieListAdapter.View
             binding.setHolder(this);
         }
 
-        @BindingAdapter({"bind:imageUrl"}) public static void loadImage(ImageView imageView, String imageUrl) {
+        @BindingAdapter({"bind:imageUrl"})
+        public static void loadImage(ImageView imageView, String imageUrl) {
             Glide.with(imageView.getContext())
                     .load(imageUrl)
                     .placeholder(R.color.colorAccent)

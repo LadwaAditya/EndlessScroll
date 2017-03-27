@@ -33,7 +33,9 @@ import timber.log.Timber;
 public class MovieFragment extends BaseFragment implements MainContract.View {
 
     private static final String KEY_TAB = "tab";
+
     @Inject MainPresenter presenter;
+
     private FragmentMovieBinding movieBinding;
     private ArrayList<MovieResponse.Movie> mMovieList;
     private MovieListAdapter movieListAdapter;
@@ -73,7 +75,8 @@ public class MovieFragment extends BaseFragment implements MainContract.View {
         presenter.attachView(this);
     }
 
-    @Override public void setUpView() {
+    @Override
+    public void setUpView() {
         mMovieList = new ArrayList<>();
         movieListAdapter = new MovieListAdapter(mMovieList);
         if (mTab == 0) {
@@ -81,7 +84,8 @@ public class MovieFragment extends BaseFragment implements MainContract.View {
             movieBinding.rvMovie.setLayoutManager(linearLayoutManager);
             movieBinding.rvMovie.setAdapter(movieListAdapter);
             movieBinding.rvMovie.addOnScrollListener(new EndlessRecyclerViewScrollListener(linearLayoutManager) {
-                @Override public void onLoadMore(int page, int totalItemsCount, RecyclerView view) {
+                @Override
+                public void onLoadMore(int page, int totalItemsCount, RecyclerView view) {
                     presenter.getMovies(searchQuery, page + 1);
                     showProgressBar();
                 }
@@ -91,7 +95,8 @@ public class MovieFragment extends BaseFragment implements MainContract.View {
             movieBinding.rvMovie.setLayoutManager(gridLayoutManager);
             movieBinding.rvMovie.setAdapter(movieListAdapter);
             movieBinding.rvMovie.addOnScrollListener(new EndlessRecyclerViewScrollListener(gridLayoutManager) {
-                @Override public void onLoadMore(int page, int totalItemsCount, RecyclerView view) {
+                @Override
+                public void onLoadMore(int page, int totalItemsCount, RecyclerView view) {
                     presenter.getMovies(searchQuery, page + 1);
                     showProgressBar();
                 }
@@ -109,7 +114,8 @@ public class MovieFragment extends BaseFragment implements MainContract.View {
 
     }
 
-    @Override public void showError(Throwable error) {
+    @Override
+    public void showError(Throwable error) {
         Toast.makeText(getActivity(), error.getMessage(), Toast.LENGTH_SHORT).show();
         hidePrograssBar();
     }
@@ -123,13 +129,15 @@ public class MovieFragment extends BaseFragment implements MainContract.View {
         movieBinding.progressBar.setVisibility(View.VISIBLE);
     }
 
-    @Override public void showMovies(List<MovieResponse.Movie> movieList) {
+    @Override
+    public void showMovies(List<MovieResponse.Movie> movieList) {
         mMovieList.addAll(movieList);
         movieListAdapter.notifyDataSetChanged();
         hidePrograssBar();
     }
 
-    @Override public void showEmptyMovies(String message) {
+    @Override
+    public void showEmptyMovies(String message) {
         Toast.makeText(getActivity(), message, Toast.LENGTH_SHORT).show();
         hidePrograssBar();
     }

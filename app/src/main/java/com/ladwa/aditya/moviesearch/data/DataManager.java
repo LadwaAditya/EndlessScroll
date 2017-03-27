@@ -21,6 +21,7 @@ public class DataManager implements DataRepository {
         this.movieSearchService = movieSearchService;
     }
 
+    @Override
     public Single<MovieResponse> getMovies(String search, int page) {
         return movieSearchService.getMovie(search, page);
     }

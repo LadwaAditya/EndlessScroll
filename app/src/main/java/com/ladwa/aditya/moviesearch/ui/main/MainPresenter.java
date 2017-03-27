@@ -25,24 +25,27 @@ public class MainPresenter extends BasePresenter<MainContract.View> implements M
         this.dataManager = dataManager;
     }
 
-    @Override public void attachView(MainContract.View mvpView) {
+    @Override
+    public void attachView(MainContract.View mvpView) {
         super.attachView(mvpView);
         checkViewAttached();
         getMvpView().setUpView();
     }
 
-    @Override public void detachView() {
+    @Override
+    public void detachView() {
         super.detachView();
-
     }
 
-    @Override public void getMovies(String search, int page) {
+    @Override
+    public void getMovies(String search, int page) {
         checkViewAttached();
         addDisposable(dataManager.getMovies(search, page)
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribeWith(new DisposableSingleObserver<MovieResponse>() {
-                    @Override public void onSuccess(MovieResponse movieResponse) {
+                    @Override
+                    public void onSuccess(MovieResponse movieResponse) {
                         if (movieResponse.getResponse().equalsIgnoreCase("True")) {
                             getMvpView().showMovies(movieResponse.getMovie());
                         } else {
@@ -50,7 +53,8 @@ public class MainPresenter extends BasePresenter<MainContract.View> implements M
                         }
                     }
 
-                    @Override public void onError(Throwable e) {
+                    @Override
+                    public void onError(Throwable e) {
                         getMvpView().showError(e);
                     }
                 }));

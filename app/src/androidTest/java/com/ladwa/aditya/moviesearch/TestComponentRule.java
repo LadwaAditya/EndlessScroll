@@ -30,9 +30,9 @@ public class TestComponentRule implements TestRule {
                 .build();
     }
 
-    public TestComponent getTestComponent() {
-        return mTestComponent;
-    }
+//    public TestComponent getTestComponent() {
+//        return mTestComponent;
+//    }
 
     public Context getContext() {
         return mContext;
@@ -42,9 +42,11 @@ public class TestComponentRule implements TestRule {
         return mTestComponent.dataManager();
     }
 
-    @Override public Statement apply(Statement base, Description description) {
+    @Override
+    public Statement apply(Statement base, Description description) {
         return new Statement() {
-            @Override public void evaluate() throws Throwable {
+            @Override
+            public void evaluate() throws Throwable {
                 MovieSearchApplication application = MovieSearchApplication.get(mContext);
                 application.setComponent(mTestComponent);
 

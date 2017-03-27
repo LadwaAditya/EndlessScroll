@@ -10,7 +10,7 @@ android {
         targetSdkVersion 25
         versionCode 1
         versionName "1.0"
-        testInstrumentationRunner "com.ladwa.aditya.moviesearch.runner.CustomTestRunner"
+        testInstrumentationRunner "${applicationId}.runner.CustomTestRunner"
 
         buildConfigField("String", "MOVIE_API_URL", "\"${OpenMovieDbUrl}\"")
 
@@ -59,10 +59,6 @@ android {
     }
     sourceSets { main { assets.srcDirs = ['src/main/assets', 'src/androidTest/assets/'] } }
 }
-
-
-
-
 
 dependencies {
 

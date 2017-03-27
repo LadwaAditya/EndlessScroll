@@ -37,16 +37,16 @@ import static org.hamcrest.Matchers.allOf;
 @RunWith(AndroidJUnit4.class)
 public class MainActivityTest {
 
-    private MovieSearchService movieSearchService;
-    private final TestComponentRule mComponent = new TestComponentRule(InstrumentationRegistry.getTargetContext());
-    private final ActivityTestRule<MainActivity> activityTestRule = new ActivityTestRule<>(MainActivity.class, false, false);
-
     private static final int RESULT_OK = 200;
 
     private static final String PATH_MOVIE = "/movies.json";
     private static final String PATH_MOVIE_ZERO = "/movieszero.json";
 
+    private final TestComponentRule mComponent = new TestComponentRule(InstrumentationRegistry.getTargetContext());
+    private final ActivityTestRule<MainActivity> activityTestRule =
+            new ActivityTestRule<>(MainActivity.class, false, false);
     @Rule public TestRule chain = RuleChain.outerRule(mComponent).around(activityTestRule);
+    private MovieSearchService movieSearchService;
 
     @Before
     public void setUp() throws Exception {
@@ -61,7 +61,6 @@ public class MainActivityTest {
 
     @Test
     public void shouldshowMovies_whenApiReturnsResults() throws Exception {
-
         RESTMockServer
                 .whenGET(RequestMatchers.hasQueryParameters())
                 .thenReturnFile(RESULT_OK, TestApplication.PATH_ASSETS_CONTACT + PATH_MOVIE);
@@ -73,7 +72,6 @@ public class MainActivityTest {
         typeTextToView(R.id.txt_search, "Batman");
         onView(withId(R.id.img_search)).perform(click());
         onView(allOf(isDisplayed(), withId(R.id.rv_movie))).check(matches(isDisplayed()));
-
     }
 
 

@@ -38,16 +38,19 @@ public class MainActivity extends BaseActivity implements TabLayout.OnTabSelecte
         return mPublishSubject;
     }
 
-    @Override public void onTabSelected(TabLayout.Tab tab) {
+    @Override
+    public void onTabSelected(TabLayout.Tab tab) {
         mBinding.pager.setCurrentItem(tab.getPosition());
         currentTab = tab.getPosition();
     }
 
-    @Override public void onTabUnselected(TabLayout.Tab tab) {
+    @Override
+    public void onTabUnselected(TabLayout.Tab tab) {
 
     }
 
-    @Override public void onTabReselected(TabLayout.Tab tab) {
+    @Override
+    public void onTabReselected(TabLayout.Tab tab) {
 
     }
 
